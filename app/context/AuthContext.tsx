@@ -31,7 +31,7 @@ const [isAuthenticated, setisAuthenticated] = useState(false)
 const [userCred, setuserCred] = useState({name:"",email:"",phone:"",image:""})
 const [token, setToken] = useState("")
 //http://localhost:3000/
-const [prevURL,setPrevURL]=useState("ttps://taskfront-3n6h.onrender.com/" )
+const [prevURL,setPrevURL]=useState("https://taskfront-3n6h.onrender.com/" )
 const [BASE_URL] = useState("https://taskfront-3n6h.onrender.com/")
 
 useEffect(() => {
