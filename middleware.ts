@@ -25,11 +25,15 @@ export function middleware(request: NextRequest) {
       const loginUrl = new URL('/Auth/Login', request.url);
       return NextResponse.redirect(loginUrl);
     }
-    if (userData?.email_verified_at == null) {
+    
+  }if (userData?.email_verified_at == null) {
       const verifyUrl = new URL('/verify-email', request.url);
-      return NextResponse.redirect(verifyUrl);
+      if (!token) {
+        const loginUrl = new URL('/Auth/Login', request.url);
+        return NextResponse.redirect(loginUrl);
+      }else{ return NextResponse.redirect(verifyUrl);}
+     
     }
-  }
 
   return NextResponse.next();
 }
