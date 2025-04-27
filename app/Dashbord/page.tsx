@@ -111,8 +111,24 @@ export default function DashboardPage() {
             <DollarSign className="h-5 w-5 text-indigo-400" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-white"># {loading?(<div className="w-8 h-8 border-4 border-blue-500 border-dashed rounded-full animate-spin"></div>):(new Intl.NumberFormat().format(Tally['highest_monthly_expense'][0]['amount']) +" - " + Tally['highest_monthly_expense'][0]['category'])}</div>
-            <div className="text-xs text-gray-400 mt-1">{loading?(<p className="w-8 h-8 border-4 border-blue-500 border-dashed rounded-full animate-spin"></p>):formatDistanceToNow(new Date(Tally['highest_monthly_expense'][0]['created_at']), { addSuffix: true })}</div>
+          <div className="text-xs text-gray-400 mt-1">
+  {loading ? (
+    <p className="w-8 h-8 border-4 border-blue-500 border-dashed rounded-full animate-spin"></p>
+  ) : Tally?.highest_monthly_expense?.[0]?.created_at ? (
+    formatDistanceToNow(new Date(Tally.highest_monthly_expense[0].created_at), { addSuffix: true })
+  ) : (
+    "No data available"
+  )}
+</div>
+            <div className="text-xs text-gray-400 mt-1">
+  {loading ? (
+    <p className="w-8 h-8 border-4 border-blue-500 border-dashed rounded-full animate-spin"></p>
+  ) : Tally?.highest_monthly_expense?.[0]?.created_at ? (
+    formatDistanceToNow(new Date(Tally.highest_monthly_expense[0].created_at), { addSuffix: true })
+  ) : (
+    "No data available"
+  )}
+            </div>
           </CardContent>
         </Card>
       </div>
