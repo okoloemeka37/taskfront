@@ -1,6 +1,6 @@
 "use client";
 
-import { Menu, X, Home, PlusCircle, List, User, LogOut,Trash } from "lucide-react";
+import { Menu, X, Home, PlusCircle, List, User, LogOut,Trash,History } from "lucide-react";
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";    
@@ -21,6 +21,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     { href: "/Dashbord/all-expenses", label: "All Expenses", icon: <List size={18} /> },
     { href: "/Dashbord/profile", label: "Profile", icon: <User size={18} /> },
     { href: "/Dashbord/trash", label: "Trash", icon: <Trash size={18} /> },
+    { href: "/Dashbord/history", label: "History", icon: <History size={18} /> },
   ];
 
   return (
@@ -45,7 +46,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
               <Link
                 key={link.href}
                 href={link.href}
-                className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all text-sm font-medium ${
+                className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all text-sm font-medium cursor-pointer ${
                   isActive
                     ? "bg-indigo-500 text-white shadow-lg"
                     : "text-gray-300 hover:text-white hover:bg-white/10"

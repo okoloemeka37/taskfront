@@ -8,6 +8,14 @@ import { useState,useEffect } from "react";
 import { formatDistanceToNow } from 'date-fns'
 import Swal from "sweetalert2";
 
+/* const handleExportExcel = () => {
+  const worksheet = XLSX.utils.json_to_sheet(expenses);
+  const workbook = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(workbook, worksheet, "Expenses");
+  XLSX.writeFile(workbook, "expense_history.xlsx");
+};
+ */
+
 export default function SingleExpensePage() {
   const router=useRouter()
   const { id } = useParams();
