@@ -12,6 +12,7 @@ userCred: {name: string; email: string; phone: string; image:string};
 token: string;
 prevURL:string;
 BASE_URL: string;
+Base_image_url:string;
 setterURL:(url:string)=>void;
 User: (data: { name: string; email: string; phone: string; image:string }) => void;
 }>({
@@ -22,6 +23,7 @@ userCred:{name:"",email:"",phone:"",image:""},
 token:"",
 prevURL:"",
 BASE_URL:"",
+Base_image_url:"",
 setterURL:()=>{},
 User:()=>{},
 })
@@ -30,10 +32,10 @@ export function AuthProvider({ children }:{children:React.ReactNode}) {
 const [isAuthenticated, setisAuthenticated] = useState(false)
 const [userCred, setuserCred] = useState({name:"",email:"",phone:"",image:""})
 const [token, setToken] = useState("")
-//http://localhost:3000
+//https://taskfront-3n6h.onrender.com http://localhost:3000/
 const [prevURL,setPrevURL]=useState("https://taskfront-3n6h.onrender.com/")
 const [BASE_URL] = useState("https://taskfront-3n6h.onrender.com/")
-
+const [Base_image_url] = useState("https:\/\/raw.githubusercontent.com\/okoloemeka37\/ImageHolder\/main\/uploads\/")
 useEffect(() => {
  if (Cookies.get('authToken')) {
     const user=JSON.parse(Cookies.get('user')!)
@@ -75,7 +77,7 @@ const User=(data:{name:string,email:string,phone:string,image:string})=>{
 }
 
 return(
-    <AuthContext.Provider value={{isAuthenticated,login,logout,userCred,token,prevURL,BASE_URL,setterURL,User}}>
+    <AuthContext.Provider value={{isAuthenticated,login,logout,userCred,token,prevURL,BASE_URL,Base_image_url,setterURL,User}}>
         {children}
         </AuthContext.Provider>
 )

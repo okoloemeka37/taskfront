@@ -5,15 +5,37 @@ import { Fragment } from "react";
 import { User as UserIcon, Settings,LogOut } from "lucide-react";
 import { useAuth } from '../context/AuthContext';
 import Link from "next/link";
+import { api } from 'next-laravel-apihelper';
+import { useRouter } from 'next/navigation';
+import { ZCOOL_XiaoWei } from 'next/font/google';
+
 export default function DropdownMenuPicture() {
-     const { userCred,BASE_URL } = useAuth(); 
+  const router = useRouter();
+  
+     const { userCred,BASE_URL,logout,Base_image_url } = useAuth(); 
+const [loading, setloading] = React.useState(false)
+     const Logo = () => {
+       setloading(true)
+       const resp=api.post("/logout")
+       .then((response) => 
+         {
+     
+       logout()
+       router.push("/Auth/Login")
+       setloading(false)
+         }).catch((error) => {
+        
+           setloading(false)
+         })
+       
+     }
   return (
     
 
 <DropdownMenu as="div" className="relative inline-block text-left">
   <DropdownMenu.Button className="w-10 h-10 rounded-full ring-2 ring-indigo-500 overflow-hidden focus:outline-none hover:ring-indigo-400 transition">
     <img
-      src={BASE_URL + "/images/skull.jpg"}
+      src={Base_image_url +userCred.image}
       alt="User"
       className="w-full h-full object-cover rounded-full"
     />
@@ -44,13 +66,14 @@ export default function DropdownMenuPicture() {
 
       <DropdownMenu.Item>
         {({ active }) => (
-          <button
+          <Link
+            href="/Dashbord/User/Edit" 
             className={`flex w-full items-center gap-3 px-4 py-3 text-sm hover:bg-gray-100 ${
               active ? "bg-gray-100" : ""
             }`}
           >
             <Settings size={16} /> Settings
-          </button>
+          </Link>
         )}
       </DropdownMenu.Item>
 
@@ -60,6 +83,7 @@ export default function DropdownMenuPicture() {
             className={`flex w-full items-center gap-3 px-4 py-3 text-sm text-red-600 hover:bg-red-50 ${
               active ? "bg-red-100" : ""
             }`}
+            onClick={Logo}
           >
             <LogOut size={16} /> Logout
           </button>

@@ -8,10 +8,12 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import DropdownMenuPicture from "../components/DropdownMenuPicture";
+import { api } from "next-laravel-apihelper";
 
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
-  const {BASE_URL,userCred}=useAuth()
+  const router = useRouter();
+  const {BASE_URL,userCred,logout}=useAuth()
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const pathname = usePathname();
 
@@ -24,6 +26,23 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     { href: "/Dashbord/history", label: "History", icon: <History size={18} /> },
   ];
 
+const [loading, setloading] = useState(false)
+  
+const Logo = () => {
+  setloading(true)
+  const resp=api.post("/logout")
+  .then((response) => 
+    {
+
+  logout()
+  router.push("/Auth/Login")
+  setloading(false)
+    }).catch((error) => {
+   
+      setloading(false)
+    })
+  
+}
   return (
     <div className="flex min-h-screen bg-gradient-to-br from-[#0f172a] to-[#1e293b] text-white font-sans">
       
@@ -59,10 +78,11 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           })}
 
            {/* Logout Button */}
-        <button className="flex items-center gap-3 hover:text-indigo-600 transition text-sm font-medium text-white bottom-0 mt-auto">
+           {loading?( <p className="w-8 h-8 border-4 border-blue-500 border-dashed rounded-full animate-spin"></p>):(     <button className="flex items-center gap-3 hover:text-indigo-600 transition text-sm font-medium text-white bottom-0 mt-auto" onClick={Logo}>
           <LogOut size={18} /> {/* Icon for Logout */}
           Logout
-        </button>
+        </button>)}
+   
         </nav>
       </aside>
 

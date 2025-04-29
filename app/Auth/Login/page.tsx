@@ -101,6 +101,13 @@ const [Gen, setGen] = useState('')
               placeholder="Enter password"
             />
             <p className="text-red-900">{errors.password}</p>
+            <div className="text-center text-sm text-white/60 mt-4">
+            Forgot your password?{" "}
+            <Link href="/Auth/ForgetPassword" className="text-blue-400 hover:underline">
+              Reset it 
+            
+            </Link>
+          </div>
           </div>
 
        {loading?(<SubmitLoaders/>):(  <button type="submit"  className="w-full rounded-xl bg-blue-600 hover:bg-blue-700 transition-all duration-300 p-3 text-white font-semibold shadow-md">Log In </button>)} 
