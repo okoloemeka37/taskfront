@@ -6,20 +6,20 @@ import { useRouter } from "next/navigation";
 
 const AuthContext=createContext<{
 isAuthenticated: boolean;
-login: (token: string, data: { name: string; email: string; phone: string; image:string }) => void;
+login: (token: string, data: { name: string; email: string; phone: string; image: string; budget: string; balance: string }) => void;
 logout: () => void;
-userCred: {name: string; email: string; phone: string; image:string};
+userCred: {name: string; email: string; phone: string; image:string,budget:string,balance:string};
 token: string;
 prevURL:string;
 BASE_URL: string;
 Base_image_url:string;
 setterURL:(url:string)=>void;
-User: (data: { name: string; email: string; phone: string; image:string }) => void;
+User: (data: { name: string; email: string; phone: string; image:string,budget:string,balance:string }) => void;
 }>({
 isAuthenticated:false,
 login:()=>{},
 logout:()=>{},
-userCred:{name:"",email:"",phone:"",image:""},
+userCred:{name:"",email:"",phone:"",image:"",budget:'',balance:''},
 token:"",
 prevURL:"",
 BASE_URL:"",
@@ -30,11 +30,11 @@ User:()=>{},
 export function AuthProvider({ children }:{children:React.ReactNode}) {
     const router=useRouter();
 const [isAuthenticated, setisAuthenticated] = useState(false)
-const [userCred, setuserCred] = useState({name:"",email:"",phone:"",image:""})
+const [userCred, setuserCred] = useState<{name: string; email: string; phone: string; image: string; budget: string; balance: string}>({name:"",email:"",phone:"",image:"",budget:"",balance:""})
 const [token, setToken] = useState("")
 //https://taskfront-3n6h.onrender.com http://localhost:3000/
-const [prevURL,setPrevURL]=useState("https://taskfront-3n6h.onrender.com/")
-const [BASE_URL] = useState("https://taskfront-3n6h.onrender.com/")
+const [prevURL,setPrevURL]=useState("http://localhost:3000/")
+const [BASE_URL] = useState("http://localhost:3000/")
 const [Base_image_url] = useState("https:\/\/raw.githubusercontent.com\/okoloemeka37\/ImageHolder\/main\/uploads\/")
 useEffect(() => {
  if (Cookies.get('authToken')) {
@@ -52,7 +52,7 @@ useEffect(() => {
  }
 }, [])
 
-const login=(token:string,data:{name:string,email:string,phone:string,image:string})=>{
+const login=(token:string,data:{name:string,email:string,phone:string,image:string,budget:string,balance:string})=>{
 Cookies.set('user',JSON.stringify(data))
 setisAuthenticated(true)
 setToken(token)
@@ -64,14 +64,14 @@ router.push(prevURL)
 const logout=()=>{
     setToken("")
     setisAuthenticated(false)
-    setuserCred({name:"",email:"",phone:"",image:""})
+    setuserCred({name:"",email:"",phone:"",image:"",budget:'',balance:''})
     Cookies.remove('authToken')
     Cookies.remove('user')
 }
 const setterURL=(url:string)=>{
     setPrevURL(url)
 }
-const User=(data:{name:string,email:string,phone:string,image:string})=>{
+const User=(data:{name:string,email:string,phone:string,image:string,budget:string,balance:string})=>{
     setuserCred(data)
     Cookies.set('user',JSON.stringify(data))    
 }

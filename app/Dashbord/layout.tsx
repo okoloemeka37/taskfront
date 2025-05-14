@@ -1,6 +1,6 @@
 "use client";
 
-import { Menu, X, Home, PlusCircle, List, User, LogOut,Trash,History } from "lucide-react";
+import { Menu, X, Home, PlusCircle, List, User, LogOut,Trash,History,Wallet } from "lucide-react";
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";    
@@ -19,11 +19,14 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
   const links = [
     { href: "/Dashbord", label: "Dashboard", icon: <Home size={18} /> },
+    { href: "/Dashbord/Wallet", label: "Wallet", icon: <Wallet className="h-4 w-4" /> },
     { href: "/Dashbord/add-expense", label: "Add Expense", icon: <PlusCircle size={18} /> },
     { href: "/Dashbord/all-expenses", label: "All Expenses", icon: <List size={18} /> },
     { href: "/Dashbord/profile", label: "Profile", icon: <User size={18} /> },
     { href: "/Dashbord/trash", label: "Trash", icon: <Trash size={18} /> },
     { href: "/Dashbord/history", label: "History", icon: <History size={18} /> },
+     
+    
   ];
 
 const [loading, setloading] = useState(false)

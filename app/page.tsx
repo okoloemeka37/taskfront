@@ -1,8 +1,7 @@
 'use client'
 
 import { useRouter } from "next/navigation";
-import { useAuth } from "./context/AuthContext";
-import { api } from "next-laravel-apihelper";
+
 import { useEffect } from "react";
 
 export default function Home() {

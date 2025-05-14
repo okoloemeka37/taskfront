@@ -7,12 +7,11 @@ import { Loader2, Upload } from "lucide-react";
 import Swal from "sweetalert2";
 import Link from "next/link";
 import { useAuth } from "../../../context/AuthContext";
-import { log } from "console";
-import { blob } from "stream/consumers";
+
 
 export default function EditUserPage() {
   const router = useRouter();
-  const { id } = useParams();
+ 
   const { userCred, User,Base_image_url } = useAuth();
   const [user, setUser] = useState(userCred);
   const [password, setPassword] = useState("");
@@ -38,17 +37,19 @@ export default function EditUserPage() {
       formData.append("email", user.email);
       formData.append("phone", user.phone || "");
       if (password.length > 0) formData.append("password", password);
-      console.log(profileImage);
       
-  
-      formData.append("profile_image", profileImage);
-  
+   
+    
+  if(profileImage.size !=0){
+      formData.append("profile_image", profileImage); 
+      console.log(profileImage.size);
+  }
 
       const resp = await api.post("/updateUser", formData);
 
       User(resp.user); // Update context
       Swal.fire("Success", "User updated successfully", "success");
-      router.push("/Dashbord");
+   router.push("/Dashbord");
     } catch (err) {
       console.error(err);
       Swal.fire("Error", "Failed to update user", "error");
@@ -61,7 +62,7 @@ export default function EditUserPage() {
     <div className="max-w-2xl mx-auto space-y-8">
       <div className="flex justify-between items-center">
         <h2 className="text-2xl font-bold text-white">Edit User</h2>
-        <Link href="/Dashbord/users" className="text-white hover:underline text-sm">
+        <Link href="/Dashbord/" className="text-white hover:underline text-sm">
           ← Back to Users
         </Link>
       </div>
