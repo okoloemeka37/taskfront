@@ -33,8 +33,8 @@ const [isAuthenticated, setisAuthenticated] = useState(false)
 const [userCred, setuserCred] = useState<{name: string; email: string; phone: string; image: string; budget: string; balance: string}>({name:"",email:"",phone:"",image:"",budget:"",balance:""})
 const [token, setToken] = useState("")
 //https://taskfront-3n6h.onrender.com http://localhost:3000/
-const [prevURL,setPrevURL]=useState("http://localhost:3000/")
-const [BASE_URL] = useState("http://localhost:3000/")
+const [prevURL,setPrevURL]=useState("https://taskfront-3n6h.onrender.com/")
+const [BASE_URL] = useState("https://taskfront-3n6h.onrender.com/")
 const [Base_image_url] = useState("https:\/\/raw.githubusercontent.com\/okoloemeka37\/ImageHolder\/main\/uploads\/")
 useEffect(() => {
  if (Cookies.get('authToken')) {
